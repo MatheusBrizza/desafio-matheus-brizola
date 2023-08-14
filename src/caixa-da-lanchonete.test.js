@@ -1,4 +1,4 @@
-import { Cardapio } from "./cardapio.js"
+import { Cardapio } from "./model/cardapio.js"
 import { CaixaDaLanchonete } from "./caixa-da-lanchonete.js";
 
 
