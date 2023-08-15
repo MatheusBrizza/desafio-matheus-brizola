@@ -1,34 +1,31 @@
 class FormaDePagamento {
-    constructor() {
-      this.pagamentoStrategy = {
-        debito: new DebitoStrategy(),
-        credito: new CreditoStrategy(),
-        dinheiro: new DinheiroStrategy(),
-      };
-      this.currentPagamentoStrategy = null;
+  constructor() {
+    //2 atributos: formaDePagamento, desconto;
     }
    
-    get getCurrentPagamentoStrategy() {
-        return this.currentPagamentoStrategy;
+  get getFormaDePagamento() {
+    return this.formaDePagamento;
+  }
+
+  get getDesconto() {
+    return this.desconto;
+  }
+
+  formaDePagamento(formaDePagamento) {
+    this.formaPagamento = formaDePagamento;
+
+    switch (formaDePagamento) {
+      case 'dinheiro':
+        this.desconto = 0.05
+        break;
+      case 'debito':
+        this.desconto = 0
+        break;
+      case 'credito':
+        this.desconto = 0.03
     }
-  
-    set setPagamentoStrategy(strategy) {
-      this.currentPagamentoStrategy = this.pagamentoStrategy[strategy];
-    }
-  
-    pagamento(valor) {
-        if (!this.currentPagamentoStrategy) {
-            console.log('Forma de pagamento inválida.');
-            return;
-        }
-      
-        if (this.currentPagamentoStrategy instanceof DinheiroStrategy) {
-            valor *= 0.95;
-        } else if (this.currentPagamentoStrategy instanceof CreditoStrategy) {
-            valor *= 1.03;
-        }
-        return valor;
-    }
+    // switch case para casos
+  }
 }
 
 export { FormaDePagamento }
