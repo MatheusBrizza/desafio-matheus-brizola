@@ -5,8 +5,8 @@ describe('CaixaDaLanchonete', () => {
 
     test("deve retornar o preço do café 3.00", () => {
         const caixa = new CaixaDaLanchonete()
-        const resultado = caixa.calcularValorDaCompra('dinheiro', ['cafe,1', 'sanduiche,2']);
-        expect(resultado).toEqual('R$ 16,00')
+        const resultado = caixa.calcularValorDaCompra('credito', ['cafe,1', 'sanduiche,2']);
+        expect(resultado).toEqual('R$ 16,48')
     })
 
 /*

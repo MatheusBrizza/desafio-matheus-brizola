@@ -23,7 +23,6 @@ class FormaDePagamento {
       case 'credito':
         this.desconto = 0.03
     }
-    // switch case para casos
   }
 }
 

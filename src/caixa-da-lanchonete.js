@@ -40,12 +40,21 @@ class CaixaDaLanchonete {
 
     calcularValorDaCompra(metodoDePagamento, itens) {
         this.forma.setFormaDePagamento(metodoDePagamento)
+        const desconto = this.forma.getDesconto
+        console.log(desconto)
         const arrValor = this.prepararCalculo(itens)
         var soma = 0,
         i = arrValor.length;
 
             while( i-- ) {
                 soma += parseFloat( arrValor[i], 10 ) || 0; 
+            }
+            if (metodoDePagamento == 'dinheiro') {
+                soma = soma - (soma * desconto)
+                console.log(soma)
+            }
+            if (metodoDePagamento == 'credito') {
+                soma = soma + (soma * desconto)
             }
         return this.arrumarString(soma)
     }
