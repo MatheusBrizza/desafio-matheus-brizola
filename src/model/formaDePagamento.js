@@ -1,20 +1,19 @@
 class FormaDePagamento {
-  constructor() {
-    //2 atributos: formaDePagamento, desconto;
-    }
-   
+  
+  formaPagamento;
+  desconto;
+
   get getFormaDePagamento() {
-    return this.formaDePagamento;
+    return this.formaPagamento;
   }
 
   get getDesconto() {
     return this.desconto;
   }
 
-  formaDePagamento(formaDePagamento) {
-    this.formaPagamento = formaDePagamento;
-
-    switch (formaDePagamento) {
+  setFormaDePagamento(fp) {
+    this.formaPagamento = fp;
+    switch (fp) {
       case 'dinheiro':
         this.desconto = 0.05
         break;

@@ -1,11 +1,16 @@
 import { Cardapio } from "./cardapio.js"
 
 describe('Cardapio', () => {
-    test("deve retornar um cardápio válido", () => {
-        const resultado = new Cardapio('cafe', 'Café', 'R$3,00');
-        expect(resultado.getCodigo).toEqual('cafe');
-        expect(resultado.getDescricao).toEqual('Café');
-        expect(resultado.getValor).toEqual('R$3,00');
+    test("deve preencher cardápio", () => {
+        const resultado = new Cardapio();
+        const cardapio = resultado.preencherCardapio()
+        expect(cardapio[0]).toEqual({"codigo": "cafe", "descricao": "Café", "valor": "3.00"});
+    })
+
+    test("deve selecionar código café", () => {
+        const resultado = new Cardapio();
+        const cardapio = resultado.preencherCardapio()
+        expect(cardapio[0].codigo).toEqual("cafe");
     })
     
 })

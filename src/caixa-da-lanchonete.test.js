@@ -1,23 +1,15 @@
-import { Cardapio } from "./model/cardapio.js"
 import { CaixaDaLanchonete } from "./caixa-da-lanchonete.js";
 
 
-/*describe('Cardapio', () => {
-
-    const validaTeste = (codigo, descricao, valor) => {
-        const resultado = new Cardapio(codigo, descricao, valor);
-        
-        expect(resultado.replace("\xa0", " ")).toEqual(resultado);
-    }
-
-    test.each([
-        ['cafe', 'Cafe', '3', []]
-    ])('compra %p em %p deve resultar em %p', (_, formaDePagamento, resultadoEsperado, itens) =>
-        validaTeste('cafe', 'cafe', '3'));
-})
-
 describe('CaixaDaLanchonete', () => {
 
+    test("deve retornar o preço do café 3.00", () => {
+        const caixa = new CaixaDaLanchonete()
+        const resultado = caixa.calcularValorDaCompra('dinheiro', ['cafe,1', 'sanduiche,2']);
+        expect(resultado).toEqual('R$ 16,00')
+    })
+
+/*
     const validaTeste = (formaDePagamento, resultadoEsperado, itens) => {
         const resultado = new CaixaDaLanchonete()
             .calcularValorDaCompra(formaDePagamento, itens);
@@ -31,7 +23,7 @@ describe('CaixaDaLanchonete', () => {
         ['com carrinho vazio', 'debito', 'Não há itens no carrinho de compra!', []],
     ])('compra %p em %p deve resultar em %p', (_, formaDePagamento, resultadoEsperado, itens) =>
         validaTeste(formaDePagamento, resultadoEsperado, itens));
-
+/*
     test.each([
         ['dinheiro', 'R$ 2,85', ['cafe,1']],
         ['credito', 'R$ 3,09', ['cafe,1']],
@@ -64,5 +56,4 @@ describe('CaixaDaLanchonete', () => {
         ['queijo com outro item', 'debito', 'Item extra não pode ser pedido sem o principal', ['cafe,1', 'queijo,1']],
     ])('compra %p em %p deve resultar em %p', (_, formaDePagamento, resultadoEsperado, itens) =>
         validaTeste(formaDePagamento, resultadoEsperado, itens));
-});
-*/
+*/});

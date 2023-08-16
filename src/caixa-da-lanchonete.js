@@ -2,21 +2,52 @@ import { FormaDePagamento } from "./model/formaDePagamento";
 import { Cardapio } from "./model/cardapio";
 class CaixaDaLanchonete {
 
-    preencherCardapio() {
-        const cafe = new Cardapio('cafe', 'Café', '3.00');
-        const chantily = new Cardapio('chantily', 'Chantily (extra do Café)', '1.50');
-        const suco = new Cardapio('suco', 'Suco Natural', '6.20');
-        const sanduiche = new Cardapio('sanduiche', 'Sanduíche', '6.50');
-        const queijo = new Cardapio('queijo', 'Queijo (extra do Sanduíche)', '2.00');
-        const salgado = new Cardapio('salgado', 'Salgado', '7.25')
-        const combo1 = new Cardapio('combo1', '1 Suco e 1 Sanduíche', '9.50')
-        const combo2 = new Cardapio('combo2', '1 Café e 1 Sanduíche', '7.50')
+    cardapio = new Cardapio()
+    forma = new FormaDePagamento()
+    listaCardapio = this.cardapio.preencherCardapio()
+    
+    prepararCalculo(itens) {
+        const arrItem = []
+        const arrValor = []
+        const arrQuant = []
+        const arrPreco = []
+        for(var i = 0; i < itens.length; i++) {
+            const item = itens[i].split(',')
+            arrItem.push(item[0])
+            arrQuant.push(item[1])
+        }
+            console.log(arrQuant)
+        
+        for(var i = 0; i < arrItem.length; i++) {
+            const itemCodigo = arrItem[i]
+            this.listaCardapio.forEach(function(listaCardapio){
+                if (itemCodigo == listaCardapio.codigo) {
+                    arrValor.push(listaCardapio.valor)
+                }
+            })
+        }
+        for (i = 0; i < arrItem.length; i++) {
+            arrPreco.push(arrValor[i] * arrQuant[i])
+        }
+        return arrPreco
+    }
+
+    arrumarString(valor) {
+        const reais = 'R$ '.concat(valor.toFixed(2))
+            const resultado = reais.replace('.', ',')
+            return resultado
     }
 
     calcularValorDaCompra(metodoDePagamento, itens) {
-        const item = this.cafe.getCodigo
-        metodoDePagamento = new FormaDePagamento('debito').pagamento(cafe.getValor)
-        return item;
+        this.forma.setFormaDePagamento(metodoDePagamento)
+        const arrValor = this.prepararCalculo(itens)
+        var soma = 0,
+        i = arrValor.length;
+
+            while( i-- ) {
+                soma += parseFloat( arrValor[i], 10 ) || 0; 
+            }
+        return this.arrumarString(soma)
     }
 
 }

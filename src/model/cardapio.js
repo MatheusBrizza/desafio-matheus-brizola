@@ -1,22 +1,16 @@
 class Cardapio {
-    constructor(codigo, descricao, valor) {
-        this.codigo = codigo
-        this.descricao = descricao
-        this.valor = valor
-    }
-    
-    get getCodigo() {
-        return this.codigo
-    }
-
-    get getDescricao() {
-        return this.descricao
-    }
-
-    get getValor() {
-        return this.valor
-    }
-    
+    preencherCardapio() {
+        const lista = []
+        lista.push({codigo:'cafe', descricao:'Café', valor:'3.00'})
+        lista.push({codigo:'chantily', descricao:'Chantily (extra do Café)', valor:'1.50'})
+        lista.push({codigo:'suco', descricao:'Suco Natural', valor:'6.20'})
+        lista.push({codigo:'sanduiche', descricao:'Sanduíche', valor:'6.50'})
+        lista.push({codigo:'queijo', descricao:'Queijo (extra do Sanduíche)', valor:'2.00'})
+        lista.push({codigo:'salgado', descricao:'Salgado', valor:'7.25'})
+        lista.push({codigo:'combo1', descricao:'1 Suco e 1 Sanduíche', valor:'9.50'})
+        lista.push({codigo:'combo2', descricao:'1 Café e 1 Sanduíche', valor:'7.50'})
+        return lista
+    }  
 }
 
 export { Cardapio };
