@@ -3,62 +3,117 @@ import { Cardapio } from "./model/cardapio";
 class CaixaDaLanchonete {
 
     cardapio = new Cardapio()
+    cardapioCodigos = new Cardapio()
     forma = new FormaDePagamento()
     listaCardapio = this.cardapio.preencherCardapio()
-    
-    prepararCalculo(itens) {
-        const arrItem = []
-        const arrValor = []
-        const arrQuant = []
-        const arrPreco = []
-        for(var i = 0; i < itens.length; i++) {
+    listaCodigos = this.cardapio.preencherCodigos()
+
+    prepararQuantidades(itens) {
+        const arrQuantidades = []
+        for (var i = 0; i < itens.length; i++) {
             const item = itens[i].split(',')
-            arrItem.push(item[0])
-            arrQuant.push(item[1])
+            arrQuantidades.push(item[1])
         }
-            console.log(arrQuant)
-        
-        for(var i = 0; i < arrItem.length; i++) {
-            const itemCodigo = arrItem[i]
-            this.listaCardapio.forEach(function(listaCardapio){
+        return arrQuantidades
+    }
+
+    prepararCodigos(itens) {
+        const arrCodigos = []
+        for (var i = 0; i < itens.length; i++) {
+            const item = itens[i].split(',')
+            arrCodigos.push(item[0])
+        }
+        return arrCodigos
+    }
+
+    prepararCalculoValores(arrCodigos, arrQuantidades) {
+        const arrValores = []
+        const arrPrecos = []
+
+        for (var i = 0; i < arrCodigos.length; i++) {
+            const itemCodigo = arrCodigos[i]
+            this.listaCardapio.forEach(function (listaCardapio) {
                 if (itemCodigo == listaCardapio.codigo) {
-                    arrValor.push(listaCardapio.valor)
+                    arrValores.push(listaCardapio.valor)
                 }
             })
         }
-        for (i = 0; i < arrItem.length; i++) {
-            arrPreco.push(arrValor[i] * arrQuant[i])
+        for (i = 0; i < arrCodigos.length; i++) {
+            arrPrecos.push(arrValores[i] * arrQuantidades[i])
         }
-        return arrPreco
+        return arrPrecos
     }
 
     arrumarString(valor) {
         const reais = 'R$ '.concat(valor.toFixed(2))
-            const resultado = reais.replace('.', ',')
-            return resultado
+        const resultado = reais.replace('.', ',')
+        return resultado
     }
 
     calcularValorDaCompra(metodoDePagamento, itens) {
         this.forma.setFormaDePagamento(metodoDePagamento)
         const desconto = this.forma.getDesconto
-        console.log(desconto)
-        const arrValor = this.prepararCalculo(itens)
-        var soma = 0,
-        i = arrValor.length;
+        const arrQuantidades = this.prepararQuantidades(itens)
+        const arrCodigos = this.prepararCodigos(itens)
+        const arrValores = this.prepararCalculoValores(arrCodigos, arrQuantidades)
 
-            while( i-- ) {
-                soma += parseFloat( arrValor[i], 10 ) || 0; 
+        for (i = 0; i < arrQuantidades.length; i++) {
+            if (arrQuantidades[i] <= 0) {
+                return 'Quantidade inválida!'
             }
-            if (metodoDePagamento == 'dinheiro') {
-                soma = soma - (soma * desconto)
-                console.log(soma)
+        }
+
+        if (arrCodigos.length == 0) {
+            return 'Não há itens no carrinho de compra!'
+        }
+
+        if (this.forma.getFormaDePagamento !== 'debito'
+            && this.forma.getFormaDePagamento !== 'credito'
+            && this.forma.getFormaDePagamento !== 'dinheiro') {
+            return 'Forma de pagamento inválida!'
+        }
+
+        for (i = 0; i < arrCodigos.length; i++) {
+            if (!this.listaCodigos.includes(arrCodigos[i])) {
+                return 'Item inválido!'
             }
-            if (metodoDePagamento == 'credito') {
-                soma = soma + (soma * desconto)
+        }
+
+        for (i = 0; i < arrCodigos.length; i++) {
+            if (arrCodigos[i] == 'chantily') {
+                for (var j = 0; j < arrCodigos.length; j++) {
+                    if (!arrCodigos.includes('cafe')) {
+                        return 'Item extra não pode ser pedido sem o principal'
+                    }
+                }
             }
+        }
+
+        for (i = 0; i < arrCodigos.length; i++) {
+            if (arrCodigos[i] == 'queijo') {
+                for (var j = 0; j < arrCodigos.length; j++) {
+                    if (!arrCodigos.includes('sanduiche')) {
+                        return 'Item extra não pode ser pedido sem o principal'
+                    }
+                }
+            }
+        }
+
+        var soma = 0,
+            i = arrValores.length
+
+        while (i--) {
+            soma += parseFloat(arrValores[i], 10) || 0
+        }
+
+        if (metodoDePagamento == 'dinheiro') {
+            soma = soma - (soma * desconto)
+        }
+        if (metodoDePagamento == 'credito') {
+            soma = soma + (soma * desconto)
+        }
         return this.arrumarString(soma)
     }
-
 }
 
 export { CaixaDaLanchonete };

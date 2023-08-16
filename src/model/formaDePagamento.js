@@ -1,5 +1,5 @@
 class FormaDePagamento {
-  
+
   formaPagamento;
   desconto;
 
@@ -22,6 +22,7 @@ class FormaDePagamento {
         break;
       case 'credito':
         this.desconto = 0.03
+        break;
     }
   }
 }
