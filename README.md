@@ -1,3 +1,13 @@
+Projeto desenvolvido para o programa StratDB em JavaScprit puro.
+
+Para rodar os testes, abra o diretório e escreva npm test.
+
+Novos testes foram desenvolvidos, englobando testes para criação de cardápio, formas de pagamento, quantidades de itens negativas e de combos não aceitarem itens extras.
+
+O gerenciamento do projeto foi feito no trello no seguinte link:
+
+    https://trello.com/b/e6S9eytw/desafio-startdb-matheus-brizola
+
 # CAIXA DA LANCHONETE
 
 ## COMO BAIXAR O CÓDIGO E SUBMETER MINHA SOLUÇÃO?
