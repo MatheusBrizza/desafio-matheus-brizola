@@ -6,7 +6,9 @@ Novos testes foram desenvolvidos, englobando testes para criação de cardápio,
 
 O gerenciamento do projeto foi feito no trello no seguinte link:
 
-    https://trello.com/b/e6S9eytw/desafio-startdb-matheus-brizola
+<https://trello.com/b/e6S9eytw/desafio-startdb-matheus-brizola>
+
+<img src ="/doc/backlog sprints.png">
 
 # CAIXA DA LANCHONETE
 
